@@ -14,7 +14,7 @@ private:
     static int idClass;
 
 public:
-    Gift(const char *_name = "undefined", const char *_destination = "undefined", const char *_personName = "undefined", ToyClass *_toys = {}, int _toysLength = 0);
+    Gift(const char *_name = "undefined ", const char *_destination = "undefined", const char *_personName = "undefined", ToyClass *_toys = {}, int _toysLength = 0);
     Gift(const Gift &obj);
     Gift &operator=(const Gift &obj);
     friend istream &operator>>(istream &in, Gift &obj);
