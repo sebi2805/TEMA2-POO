@@ -1,15 +1,16 @@
 #include <ostream>
 #include <string.h>
-#include "ToyClass.h"
+#include "BToyClass.h"
 #include "Gift.h"
+#include "ModernToy.h"
 #include "InterfaceClass.h"
 
 using namespace std;
 
 int main()
 {
-
-    InterfaceMenu menu;
-    menu.start();
+    ModernToy sebi;
+    cin >> sebi;
+    cout << sebi;
     return 0;
 }
