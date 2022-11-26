@@ -2,7 +2,10 @@
 #include <string>
 #include <vector>
 #include "Gift.h"
-
+#include "ClassicToy.h"
+#include "ElectronicToy.h"
+#include "EducativeToy.h"
+#include "ModernToy.h"
 int Gift::idClass = 1;
 
 Gift::Gift(const string _name, const string _destination, const string _personName, vector<BToyClass *> _toys, int _toysLength)
@@ -57,9 +60,47 @@ istream &operator>>(istream &in, Gift &obj)
 
     for (int j = 0; j < obj.getToysLength(); j++)
     {
+        int type;
         cout << "**************Jucaria numarul: "
              << "**************\n**********************" << j + 1 << "**********************\nIntroduceti numele jucariei\n";
-        in >> *(obj.toys[j]);
+        cout << endl
+             << "Ce tip de jucarie vreti sa introduceti?\n1.ClassicToy\n2.ElectronicToy\n3.EducativeToy\n4.ModernToy\n";
+        in >> type;
+        switch (type)
+        {
+        case 1:
+        {
+            ClassicToy aux;
+            in >> aux;
+            obj.toys.push_back(&aux);
+            break;
+        }
+        case 2:
+        {
+            ElectronicToy aux;
+            in >> aux;
+            obj.toys.push_back(&aux);
+            break;
+        }
+        case 3:
+        {
+            EducativeToy aux;
+            in >> aux;
+            obj.toys.push_back(&aux);
+            break;
+        }
+        case 4:
+        {
+            ModernToy aux;
+            in >> aux;
+            obj.toys.push_back(&aux);
+            break;
+        }
+
+        default:
+            break;
+        }
+
         obj.toys[j]->setId(obj.idToys);
         obj.idToys++;
     }
@@ -72,7 +113,7 @@ ostream &operator<<(ostream &out, Gift &obj)
         << obj.name << " cu destinatia " << obj.destination << " pentru persoana " << obj.personName;
     out << endl;
     for (int i = 0; i < obj.toysLength; i++)
-        cout << obj.toys[i];
+        out << *(obj.toys[i]);
     out << endl;
     return out;
 }

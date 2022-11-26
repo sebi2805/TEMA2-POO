@@ -14,7 +14,6 @@ void InterfaceMenu::start()
         case 9:
         {
             const bool x = (allGifts[0] == allGifts[1]);
-
             cout << x;
         }
         case 0:
@@ -23,23 +22,23 @@ void InterfaceMenu::start()
 
         case 1:
         {
-
-            cin >> allGifts[numberOfGifts];
-            numberOfGifts++;
+            Gift aux;
+            cin >> aux;
+            allGifts.push_back(aux);
             break;
         }
 
         case 2:
         {
-            if (numberOfGifts == 0)
+            if (allGifts.size() == 0)
                 cout << "Configurati primul cadou\n";
             else
             {
                 int j;
                 cout << "Ce cadou vrei sa afisezi?\n";
                 cin >> j;
-                cout << "destinatie" << allGifts[0].getDestination();
-                if (j <= numberOfGifts)
+
+                if (j <= allGifts.size())
                     cout << allGifts[j - 1];
                 else
                     cout << "Ne pare rau acest cadou nu exista.\n";
@@ -49,8 +48,7 @@ void InterfaceMenu::start()
         case 3:
         {
 
-            cin >> allGifts[numberOfGifts];
-            numberOfGifts++;
+            cin >> allGifts[allGifts.size()];
             break;
         }
 
@@ -59,19 +57,11 @@ void InterfaceMenu::start()
             int j;
             cout << "Ce cadou doriti sa stergeti?\n";
             cin >> j;
-            if (j < numberOfGifts)
+            if (j <= allGifts.size())
             {
-
-                for (int k = j - 1; j < numberOfGifts; j++)
-                {
-                    cout << "Pasul" << k << endl;
-                    allGifts[k] = allGifts[k + 1];
-                    cout << "Stergere completa. \n";
-                    numberOfGifts--;
-                }
+                allGifts.erase(allGifts.begin() + j);
             }
-            else if (j == numberOfGifts)
-                numberOfGifts--;
+
             else
                 cout << "Ne pare rau acest cadou nu exista.\n";
             break;
@@ -94,7 +84,7 @@ void InterfaceMenu::start()
         }
         case 7:
         {
-            for (int i = 0; i < numberOfGifts; i++)
+            for (int i = 0; i < allGifts.size(); i++)
             {
                 cout << allGifts[i];
                 cout << endl;

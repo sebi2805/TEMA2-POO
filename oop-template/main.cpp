@@ -9,8 +9,7 @@ using namespace std;
 
 int main()
 {
-    ModernToy sebi;
-    cin >> sebi;
-    cout << sebi;
+    InterfaceMenu menu;
+    menu.start();
     return 0;
 }

@@ -15,8 +15,9 @@ public:
     void setAbilityLearned(const string _abilityLearned);
     bool operator==(const ModernToy &obj);
     bool operator!=(const ModernToy &obj);
-    friend ostream &operator<<(ostream &out, const ModernToy &obj);
+    friend ostream &operator<<(ostream &out, ModernToy &obj);
     friend istream &operator>>(istream &in, ModernToy &obj);
     ModernToy &operator=(const ModernToy &obj);
+    virtual ~ModernToy() {}
 };
 #endif

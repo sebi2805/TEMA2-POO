@@ -39,9 +39,9 @@ ModernToy &ModernToy::operator=(const ModernToy &obj)
     brand = obj.brand;
     return *this;
 };
-ostream &operator<<(ostream &out, const ModernToy &obj)
+ostream &operator<<(ostream &out, ModernToy &obj)
 {
-    out << static_cast<ElectronicToy>(obj) << static_cast<EducativeToy>(obj)
+    out << static_cast<ElectronicToy &>(obj) << static_cast<EducativeToy &>(obj)
         << "        Brandul este: " << obj.brand << endl;
     return out;
 };

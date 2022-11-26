@@ -14,8 +14,11 @@ public:
     void setAbilityLearned(const string _abilityLearned);
     bool operator==(const EducativeToy &obj);
     bool operator!=(const EducativeToy &obj);
-    friend ostream &operator<<(ostream &out, const EducativeToy &obj);
+    friend ostream &operator<<(ostream &out, EducativeToy &obj);
     friend istream &operator>>(istream &in, EducativeToy &obj);
     EducativeToy &operator=(const EducativeToy &obj);
+    virtual ~EducativeToy()
+    {
+    }
 };
 #endif

@@ -5,16 +5,14 @@
 class InterfaceMenu
 {
 private:
-    Gift *allGifts = new Gift[10];
+    vector<Gift> allGifts;
     int i;
-    int numberOfGifts = 0;
 
 public:
     InterfaceMenu(){};
     void start();
     ~InterfaceMenu()
     {
-        delete[] allGifts;
     }
 };
 #endif

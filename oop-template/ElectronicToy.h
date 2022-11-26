@@ -15,7 +15,8 @@ public:
     bool operator==(const ElectronicToy &obj);
     bool operator!=(const ElectronicToy &obj);
     ElectronicToy &operator=(const ElectronicToy &obj);
-    friend ostream &operator<<(ostream &out, const ElectronicToy &obj);
+    friend ostream &operator<<(ostream &out, ElectronicToy &obj);
     friend istream &operator>>(istream &in, ElectronicToy &obj);
+    virtual ~ElectronicToy() {}
 };
 #endif

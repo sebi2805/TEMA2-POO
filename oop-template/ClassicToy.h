@@ -16,7 +16,7 @@ public:
     void setColor(const string _culoare);
     bool operator==(const ClassicToy &obj);
     bool operator!=(const ClassicToy &obj);
-    friend ostream &operator<<(ostream &out, const ClassicToy &obj);
+    friend ostream &operator<<(ostream &out, ClassicToy &obj);
     friend istream &operator>>(istream &in, ClassicToy &obj);
     ClassicToy &operator=(const ClassicToy &obj);
 };

@@ -45,9 +45,9 @@ ClassicToy &ClassicToy::operator=(const ClassicToy &obj)
     color = obj.color;
     return *this;
 };
-ostream &operator<<(ostream &out, const ClassicToy &obj)
+ostream &operator<<(ostream &out, ClassicToy &obj)
 {
-    out << static_cast<BToyClass>(obj)
+    out << static_cast<BToyClass &>(obj)
         << "        Material este: " << obj.material << " si culoarea: " << obj.color << endl;
     return out;
 };

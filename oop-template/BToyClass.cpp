@@ -45,12 +45,15 @@ bool BToyClass::operator!=(const BToyClass &obj)
     bool res = !(*this == obj);
     return res; // !(*this == rhs)
 };
-ostream &operator<<(ostream &out, const BToyClass &obj)
+ostream &operator<<(ostream &out, BToyClass &obj)
 {
     if (!obj.isPrinted)
     {
+        obj.isPrinted = true;
         out << "    Id: " << obj.id << ". Numele jucariei este: " << obj.name << " cu pretul de " << obj.price << " si greutate de " << obj.weight << endl;
     }
+    else
+        obj.isPrinted = false;
 
     return out;
 };

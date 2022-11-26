@@ -37,9 +37,9 @@ EducativeToy &EducativeToy::operator=(const EducativeToy &obj)
     abilityLearned = obj.abilityLearned;
     return *this;
 };
-ostream &operator<<(ostream &out, const EducativeToy &obj)
+ostream &operator<<(ostream &out, EducativeToy &obj)
 {
-    out << static_cast<BToyClass>(obj)
+    out << static_cast<BToyClass &>(obj)
         << "        Abilitatea dezvoltata este: " << obj.abilityLearned << endl;
     return out;
 };
