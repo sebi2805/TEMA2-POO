@@ -1,0 +1,7 @@
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/oop.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/list_install_components.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/install.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/install/local.dir
+C:/Users/LPT00079/Desktop/POO LAB/oop-template/cmake-build-debug-mingw/CMakeFiles/install/strip.dir
