@@ -15,8 +15,8 @@ private:
     bool isRead = false, isPrinted = false;
 
 public:
-    BToyClass(const string _name = "undefined", float _price = 0,
-              float _weight = 0, const string _category = "none", int _age = 3, int _id = 1);
+    explicit BToyClass(const string _name = "undefined", float _price = 0,
+                       float _weight = 0, const string _category = "none", int _age = 3, int _id = 1);
     BToyClass(const BToyClass &obj);
     BToyClass &operator=(const BToyClass &obj);
     friend ostream &operator<<(ostream &out, BToyClass &obj);

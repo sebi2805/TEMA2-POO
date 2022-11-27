@@ -3,25 +3,14 @@
 #include "BToyClass.h"
 using namespace std;
 BToyClass::BToyClass(const string _name, float _price, float _weight, const string _category, int _age, int _id)
+    : category(_category), name(_name), price(_price), weight(_weight), age(_age), id(_id)
 {
-    name = _name;
-    category = _category;
-    price = _price;
-    weight = _weight;
-    age = _age;
-    id = _id;
 }
-
 BToyClass::BToyClass(const BToyClass &obj)
+    : name(obj.name), category(obj.category), price(obj.price),
+      weight(obj.weight), age(obj.age), id(obj.id)
 {
-    name = obj.name;
-    category = obj.category;
-    price = obj.price;
-    weight = obj.weight;
-    age = obj.age;
-    id = obj.id;
 }
-
 BToyClass &BToyClass::operator=(const BToyClass &obj)
 {
 
@@ -33,7 +22,6 @@ BToyClass &BToyClass::operator=(const BToyClass &obj)
     id = obj.id;
     return *this;
 };
-
 bool BToyClass::operator==(const BToyClass &obj)
 {
     bool res = (age == obj.age) && price == obj.price && weight == obj.weight && (!name.compare(obj.name)) && (!category.compare(obj.category));
@@ -97,7 +85,6 @@ int BToyClass::getAge()
 {
     return age;
 };
-
 const string BToyClass::getCategory() const
 {
     return category;
@@ -110,7 +97,6 @@ void BToyClass::setCategory(const string _category)
 {
     category = _category;
 }
-
 void BToyClass::setPrice(float _price)
 {
     price = _price;
