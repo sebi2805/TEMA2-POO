@@ -40,13 +40,14 @@ ElectronicToy &ElectronicToy::operator=(const ElectronicToy &obj)
 };
 ostream &operator<<(ostream &out, ElectronicToy &obj)
 {
-    out << static_cast<BToyClass &>(obj)
+    out << "ElectronicToy" << endl;
+    out << *dynamic_cast<BToyClass *>(&obj)
         << "        Numarul de baterii este: " << obj.numberBaterries << endl;
     return out;
 };
 istream &operator>>(istream &in, ElectronicToy &obj)
 {
-    in >> static_cast<BToyClass &>(obj);
+    in >> *dynamic_cast<BToyClass *>(&obj);
     cout << "Introduceti numarul de baterii:" << endl;
     in >> obj.numberBaterries;
 

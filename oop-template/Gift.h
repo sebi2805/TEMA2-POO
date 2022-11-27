@@ -10,7 +10,7 @@ class Gift
 {
 private:
     string name, destination, personName;
-    vector<BToyClass *> toys;
+    vector<unique_ptr<BToyClass>> toys;
     int toysLength = 0, id, idToys = 0;
     static int idClass;
 
@@ -24,7 +24,7 @@ public:
     const string getName() const;
     const string getDestination() const;
     const string getPersonName() const;
-    const vector<BToyClass *> getToys() const;
+    vector<BToyClass *> getToys();
     int getToysLength();
     void setName(const string _name);
     void setDestination(const string _destination);

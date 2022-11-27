@@ -6,6 +6,7 @@
 #include "ElectronicToy.h"
 #include "EducativeToy.h"
 #include "ModernToy.h"
+#include <typeinfo>
 int Gift::idClass = 1;
 
 Gift::Gift(const string _name, const string _destination, const string _personName, vector<BToyClass *> _toys, int _toysLength)
@@ -16,9 +17,9 @@ Gift::Gift(const string _name, const string _destination, const string _personNa
     destination = _destination;
     personName = _personName;
     toysLength = _toysLength;
-    toys = _toys;
-
-    // idToys++;
+    // toys = _toys;
+    // !!!!!!!!!!!!!!!!!
+    idToys++;
 }
 
 Gift::Gift(const Gift &obj)
@@ -45,9 +46,6 @@ Gift &Gift::operator=(const Gift &obj)
 istream &operator>>(istream &in, Gift &obj)
 {
 
-    obj.name = new char[50];
-    obj.destination = new char[50];
-    obj.personName = new char[50];
     cout << "Introduceti numele cadoului. (alegeti un nume sugestiv si fara spatii)\n";
     in.ignore();
     getline(in, obj.name);
@@ -58,7 +56,7 @@ istream &operator>>(istream &in, Gift &obj)
     cout << "Introduceti numarul de jucarii pe care vreti sa il adaugati initial. \n";
     in >> obj.toysLength;
 
-    for (int j = 0; j < obj.getToysLength(); j++)
+    for (int j = 0; j < obj.toysLength; j++)
     {
         int type;
         cout << "**************Jucaria numarul: "
@@ -70,30 +68,31 @@ istream &operator>>(istream &in, Gift &obj)
         {
         case 1:
         {
-            ClassicToy aux;
-            in >> aux;
-            obj.toys.push_back(&aux);
+
+            obj.toys.push_back(make_unique<BToyClass>(dynamic_cast<BToyClass *>(new ClassicToy())));
+            in >> *dynamic_cast<ClassicToy *>(obj.toys[j].get());
             break;
         }
+
         case 2:
         {
-            ElectronicToy aux;
-            in >> aux;
-            obj.toys.push_back(&aux);
+
+            obj.toys.push_back(dynamic_cast<BToyClass *>(new ElectronicToy()));
+            in >> *dynamic_cast<ElectronicToy *>(obj.toys[j]);
             break;
         }
         case 3:
         {
-            EducativeToy aux;
-            in >> aux;
-            obj.toys.push_back(&aux);
+
+            obj.toys.push_back(dynamic_cast<BToyClass *>(new EducativeToy()));
+            in >> *dynamic_cast<EducativeToy *>(obj.toys[j]);
             break;
         }
         case 4:
         {
-            ModernToy aux;
-            in >> aux;
-            obj.toys.push_back(&aux);
+
+            obj.toys.push_back(dynamic_cast<BToyClass *>(new ModernToy()));
+            in >> *dynamic_cast<ModernToy *>(obj.toys[j]);
             break;
         }
 
@@ -112,8 +111,18 @@ ostream &operator<<(ostream &out, Gift &obj)
         << " Id: " << obj.id << ". Numele cadoului este "
         << obj.name << " cu destinatia " << obj.destination << " pentru persoana " << obj.personName;
     out << endl;
-    for (int i = 0; i < obj.toysLength; i++)
-        out << *(obj.toys[i]);
+    for (int i = 0; i < obj.toys.size(); i++)
+    {
+
+        if (dynamic_cast<ClassicToy *>(obj.toys[i]))
+            cout << *dynamic_cast<ClassicToy *>(obj.toys[i]);
+        else if (dynamic_cast<ElectronicToy *>(obj.toys[i]))
+            cout << *dynamic_cast<ElectronicToy *>(obj.toys[i]);
+        else if (dynamic_cast<EducativeToy *>(obj.toys[i]))
+            cout << *dynamic_cast<EducativeToy *>(obj.toys[i]);
+        else if (dynamic_cast<ModernToy *>(obj.toys[i]))
+            cout << *dynamic_cast<ModernToy *>(obj.toys[i]);
+    }
     out << endl;
     return out;
 }
@@ -121,7 +130,17 @@ bool operator==(const Gift &lhs, const Gift &rhs)
 {
 
     bool res = !lhs.destination.compare(rhs.destination) && !lhs.name.compare(rhs.name) && !lhs.personName.compare(rhs.personName);
-    res = res && (lhs.toys == rhs.toys); //!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (lhs.toys.size() != rhs.toys.size())
+    {
+        return false;
+    }
+
+    for (int i = 0; i < lhs.toys.size(); i++)
+        if (*lhs.toys[i] != *rhs.toys[i]) // because we compare values, if we compare address its going to ve always false, i tried v1==v2
+        {
+            return false;
+        }
+
     return res;
 }
 
@@ -129,7 +148,7 @@ int Gift::getToysLength()
 {
     return toysLength;
 }
-const vector<BToyClass *> Gift::getToys() const
+vector<BToyClass *> Gift::getToys()
 {
     return toys;
 }

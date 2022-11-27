@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "InterfaceClass.h"
+#include "ClassicToy.h"
 void InterfaceMenu::start()
 {
 
@@ -13,8 +14,9 @@ void InterfaceMenu::start()
         {
         case 9:
         {
-            const bool x = (allGifts[0] == allGifts[1]);
+            const bool x = (*allGifts[0] == *allGifts[1]);
             cout << x;
+            break;
         }
         case 0:
             cout << "Iesire interfata";
@@ -22,9 +24,15 @@ void InterfaceMenu::start()
 
         case 1:
         {
-            Gift aux;
-            cin >> aux;
-            allGifts.push_back(aux);
+            if (allGifts.size() == 0)
+            {
+
+                allGifts.push_back(make_unique<Gift>());
+                cin >> *(allGifts[0]);
+                // cout << "Jucarie:" << *dynamic_cast<ClassicToy *>(allGifts[0]->getToys()[0]) << endl;
+            }
+            else
+                cout << "Ati configurat deja primul cadou" << endl;
             break;
         }
 
@@ -39,16 +47,17 @@ void InterfaceMenu::start()
                 cin >> j;
 
                 if (j <= allGifts.size())
-                    cout << allGifts[j - 1];
+                    cout << *allGifts[j - 1];
                 else
                     cout << "Ne pare rau acest cadou nu exista.\n";
             }
+
             break;
         }
         case 3:
         {
-
-            cin >> allGifts[allGifts.size()];
+            allGifts.push_back(make_unique<Gift>());
+            cin >> *(allGifts[allGifts.size() - 1]);
             break;
         }
 
@@ -59,7 +68,7 @@ void InterfaceMenu::start()
             cin >> j;
             if (j <= allGifts.size())
             {
-                allGifts.erase(allGifts.begin() + j);
+                allGifts.erase(allGifts.begin() + j - 1);
             }
 
             else
@@ -71,7 +80,7 @@ void InterfaceMenu::start()
             int giftNumber;
             cout << "Ce cadou vreti sa modificati?\n";
             cin >> giftNumber;
-            allGifts[giftNumber - 1].updateGift();
+            allGifts[giftNumber - 1]->updateGift();
             break;
         }
         case 6:
@@ -79,14 +88,14 @@ void InterfaceMenu::start()
             int j;
             cout << "Pentru ce cadou vreti afisate informatiile generalizat?\n";
             cin >> j;
-            allGifts[j - 1].summariseGift();
+            allGifts[j - 1]->summariseGift();
             break;
         }
         case 7:
         {
             for (int i = 0; i < allGifts.size(); i++)
             {
-                cout << allGifts[i];
+                cout << *allGifts[i];
                 cout << endl;
             }
             break;

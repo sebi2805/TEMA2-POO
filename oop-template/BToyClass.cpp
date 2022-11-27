@@ -47,9 +47,11 @@ bool BToyClass::operator!=(const BToyClass &obj)
 };
 ostream &operator<<(ostream &out, BToyClass &obj)
 {
+    string objName = typeid(obj).name();
     if (!obj.isPrinted)
     {
-        obj.isPrinted = true;
+        if (objName.find("ModernToy") != string::npos)
+            obj.isPrinted = true;
         out << "    Id: " << obj.id << ". Numele jucariei este: " << obj.name << " cu pretul de " << obj.price << " si greutate de " << obj.weight << endl;
     }
     else

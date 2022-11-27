@@ -39,13 +39,14 @@ EducativeToy &EducativeToy::operator=(const EducativeToy &obj)
 };
 ostream &operator<<(ostream &out, EducativeToy &obj)
 {
-    out << static_cast<BToyClass &>(obj)
+    out << "EducativeToy" << endl;
+    out << *dynamic_cast<BToyClass *>(&obj)
         << "        Abilitatea dezvoltata este: " << obj.abilityLearned << endl;
     return out;
 };
 istream &operator>>(istream &in, EducativeToy &obj)
 {
-    in >> static_cast<BToyClass &>(obj);
+    in >> *dynamic_cast<BToyClass *>(&obj);
     cout << "Introduceti abilitatea dezvoltata:" << endl;
     in.ignore();
     getline(in, obj.abilityLearned);

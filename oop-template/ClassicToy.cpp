@@ -47,10 +47,12 @@ ClassicToy &ClassicToy::operator=(const ClassicToy &obj)
 };
 ostream &operator<<(ostream &out, ClassicToy &obj)
 {
-    out << static_cast<BToyClass &>(obj)
+    out << "Classic toy" << endl;
+    out << *(dynamic_cast<BToyClass *>(&obj))
         << "        Material este: " << obj.material << " si culoarea: " << obj.color << endl;
     return out;
 };
+;
 istream &operator>>(istream &in, ClassicToy &obj)
 {
     in >> static_cast<BToyClass &>(obj);
@@ -59,6 +61,5 @@ istream &operator>>(istream &in, ClassicToy &obj)
     getline(in, obj.material);
     cout << "Introduceti culoarea:" << endl;
     getline(in, obj.color);
-    cout << obj.color;
     return in;
 };

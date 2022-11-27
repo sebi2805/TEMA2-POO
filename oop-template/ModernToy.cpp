@@ -41,14 +41,15 @@ ModernToy &ModernToy::operator=(const ModernToy &obj)
 };
 ostream &operator<<(ostream &out, ModernToy &obj)
 {
-    out << static_cast<ElectronicToy &>(obj) << static_cast<EducativeToy &>(obj)
+    out << "ModernToy" << endl;
+    out << *dynamic_cast<ElectronicToy *>(&obj) << *dynamic_cast<EducativeToy *>(&obj)
         << "        Brandul este: " << obj.brand << endl;
     return out;
 };
 istream &operator>>(istream &in, ModernToy &obj)
 {
 
-    in >> static_cast<ElectronicToy &>(obj) >> static_cast<EducativeToy &>(obj);
+    in >> *dynamic_cast<ElectronicToy *>(&obj) >> *dynamic_cast<EducativeToy *>(&obj);
     cout << "Introduceti numele brandului:" << endl;
     in >> obj.brand;
 
