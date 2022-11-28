@@ -2,6 +2,15 @@
 #include <string.h>
 #include "InterfaceClass.h"
 #include "ClassicToy.h"
+void InterfaceMenu::printMessage()
+{
+    cout << "Tema numarul 2 \n Virtopeanu Sebastian-Filip\n CTI, GRUPA 264\n";
+    cout << "In aceasta aplicatie puteti configura cadouri pentru diferite persoane. Un cadou poate contone mai multe jucarii, fiecare jucarie este de un tip anume.";
+    cout << "\n Tipurile de jucarii sunt:\n ClassicToy- pentru acest tip de jucarie se cunoaste in plus materialul si culoarea";
+    cout << "\n ElectronicToy - pentru acest tip de jucarie se cunoaste in plus numarul de baterii";
+    cout << "\n EducativeToy - pentru acest tip de jucarie se cunoaste in plus abilitatea dezvoltata";
+    cout << "\n ModernToy - un ModernToy este atat un ElectronicToy cat si un EducativeToy, in plus se cunoast si brandul\n";
+}
 void InterfaceMenu::start()
 {
 

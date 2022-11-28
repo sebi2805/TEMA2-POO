@@ -10,6 +10,7 @@ using namespace std;
 int main()
 {
     InterfaceMenu menu;
+    menu.printMessage();
     menu.start();
     return 0;
 }

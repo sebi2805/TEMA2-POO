@@ -3,7 +3,7 @@
 class ToyTypeExceptions : public std::exception
 {
 public:
-    virtual const char *what() const noexcept;
+    virtual const char *what() const noexcept override;
 };
 class GiftNotFound : public std::exception
 {

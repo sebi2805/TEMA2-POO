@@ -15,18 +15,11 @@ Gift::Gift(const string _name, const string _destination,
 {
     id = idClass;
     idClass++;
-
     idToys++;
 }
 Gift::Gift(const Gift &obj) : toysLength(obj.toysLength), name(obj.name), destination(obj.destination),
                               personName(obj.personName), toys(obj.toys)
 {
-
-    toysLength = obj.toysLength;
-    name = obj.name;
-    destination = obj.destination;
-    personName = obj.personName;
-    toys = obj.toys;
 }
 Gift &Gift::operator=(const Gift &obj)
 {
@@ -55,7 +48,7 @@ istream &operator>>(istream &in, Gift &obj)
 
         updateToyHelper(in, obj);
     }
-    catch (ToyTypeExceptions x)
+    catch (exception x)
     {
         cout << "sebi";
         cout << x.what();
@@ -230,6 +223,7 @@ void Gift::summariseGift()
     cout << "Pentru cadoul " << name << " pretul total este de " << sumPrice << " cu greutatea de " << sumWeight << endl;
 }
 void updateToyHelper(istream &in, Gift &obj)
+
 {
     for (int j = 0; j < obj.toysLength; j++)
     {

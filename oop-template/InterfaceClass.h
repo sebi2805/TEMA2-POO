@@ -11,6 +11,7 @@ private:
     int i;
 
 public:
+    static void printMessage();
     InterfaceMenu(){};
     void start();
     ~InterfaceMenu()
