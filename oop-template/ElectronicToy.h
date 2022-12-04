@@ -1,7 +1,8 @@
 #ifndef ELECTRONIC_TOY
 #define ELECTRONIC_TOY
 #include "BToyClass.h"
-class ElectronicToy : virtual public BToyClass
+#include "BPlay.h"
+class ElectronicToy : virtual public BToyClass, BPlay
 {
     int numberBaterries;
 
@@ -14,6 +15,7 @@ public:
     void setNumberBatteries(const int _numberBatteries);
     bool operator==(const ElectronicToy &obj);
     bool operator!=(const ElectronicToy &obj);
+    void playSound() override;
     ElectronicToy &operator=(const ElectronicToy &obj);
     friend ostream &operator<<(ostream &out, ElectronicToy &obj);
     friend istream &operator>>(istream &in, ElectronicToy &obj);

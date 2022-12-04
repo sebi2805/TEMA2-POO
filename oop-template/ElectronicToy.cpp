@@ -3,8 +3,8 @@
 #include "ElectronicToy.h"
 #include "BToyClass.h"
 using namespace std;
-ElectronicToy::ElectronicToy(const string _name, float _price, float _weight,
-                             const string _category, int _age, int _id,
+ElectronicToy::ElectronicToy(const std::string _name, float _price, float _weight,
+                             const std::string _category, int _age, int _id,
                              int numberBatteries) : BToyClass(_name, _price, _weight, _category, _age, _id),
                                                     numberBaterries(numberBaterries)
 {
@@ -38,17 +38,21 @@ ElectronicToy &ElectronicToy::operator=(const ElectronicToy &obj)
     numberBaterries = obj.numberBaterries;
     return *this;
 };
+void ElectronicToy::playSound()
+{
+    std::cout << "Hi! I'm " << getName() << " and I'm a electronic toy." << endl;
+};
 ostream &operator<<(ostream &out, ElectronicToy &obj)
 {
-    out << "ElectronicToy" << endl;
     out << *dynamic_cast<BToyClass *>(&obj)
         << "        Numarul de baterii este: " << obj.numberBaterries << endl;
     return out;
 };
+
 istream &operator>>(istream &in, ElectronicToy &obj)
 {
     in >> *dynamic_cast<BToyClass *>(&obj);
-    cout << "Introduceti numarul de baterii:" << endl;
+    std::cout << "Introduceti numarul de baterii:" << endl;
     in >> obj.numberBaterries;
 
     return in;

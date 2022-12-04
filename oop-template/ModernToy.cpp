@@ -3,23 +3,23 @@
 #include "ModernToy.h"
 #include "ElectronicToy.h"
 #include "EducativeToy.h"
-using namespace std;
-ModernToy::ModernToy(const string _name, float _price, float _weight,
-                     const string _category, int _age, int _id,
-                     string brand, int _numberBatteries, string abilityLearned) : ElectronicToy(_name, _price, _weight, _category, _age, _id, _numberBatteries),
-                                                                                  EducativeToy(_name, _price, _weight, _category, _age, _id, abilityLearned), brand(brand)
+
+ModernToy::ModernToy(const std::string _name, float _price, float _weight,
+                     const std::string _category, int _age, int _id,
+                     std::string brand, int _numberBatteries, std::string abilityLearned) : ElectronicToy(_name, _price, _weight, _category, _age, _id, _numberBatteries),
+                                                                                            EducativeToy(_name, _price, _weight, _category, _age, _id, abilityLearned), brand(brand)
 {
 }
 ModernToy::ModernToy(const ModernToy &obj) : ElectronicToy(obj), EducativeToy(obj)
 {
     brand = obj.brand;
 }
-const string ModernToy::getAbilityLearned() const
+const std::string ModernToy::getAbilityLearned() const
 {
     return brand;
 };
 
-void ModernToy::setAbilityLearned(const string _brand)
+void ModernToy::setAbilityLearned(const std::string _brand)
 {
     brand = _brand;
 };
@@ -39,9 +39,13 @@ ModernToy &ModernToy::operator=(const ModernToy &obj)
     brand = obj.brand;
     return *this;
 };
+void ModernToy::playSound()
+{
+    std::cout << "Hi! I'm " << getName() << " and I'm a modern toy." << endl;
+};
 ostream &operator<<(ostream &out, ModernToy &obj)
 {
-    out << "ModernToy" << endl;
+
     out << *dynamic_cast<ElectronicToy *>(&obj) << *dynamic_cast<EducativeToy *>(&obj)
         << "        Brandul este: " << obj.brand << endl;
     return out;
@@ -50,7 +54,7 @@ istream &operator>>(istream &in, ModernToy &obj)
 {
 
     in >> *dynamic_cast<ElectronicToy *>(&obj) >> *dynamic_cast<EducativeToy *>(&obj);
-    cout << "Introduceti numele brandului:" << endl;
+    std::cout << "Introduceti numele brandului:" << endl;
     in >> obj.brand;
 
     return in;

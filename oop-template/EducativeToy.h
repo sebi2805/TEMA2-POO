@@ -1,7 +1,8 @@
 #ifndef EDUCATIVE_TOY
 #define EDUCATIVE_TOY
 #include "BToyClass.h"
-class EducativeToy : virtual public BToyClass
+#include "BPlay.h"
+class EducativeToy : virtual public BToyClass, BPlay
 {
     string abilityLearned;
 
@@ -14,6 +15,7 @@ public:
     void setAbilityLearned(const string _abilityLearned);
     bool operator==(const EducativeToy &obj);
     bool operator!=(const EducativeToy &obj);
+    void playSound() override;
     friend ostream &operator<<(ostream &out, EducativeToy &obj);
     friend istream &operator>>(istream &in, EducativeToy &obj);
     EducativeToy &operator=(const EducativeToy &obj);

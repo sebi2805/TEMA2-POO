@@ -9,8 +9,8 @@
 #include "MyExceptions.h"
 #include <typeinfo>
 int Gift::idClass = 1;
-Gift::Gift(const string _name, const string _destination,
-           const string _personName, vector<shared_ptr<BToyClass>> _toys, int _toysLength)
+Gift::Gift(const std::string _name, const std::string _destination,
+           const std::string _personName, std::vector<shared_ptr<BToyClass>> _toys, int _toysLength)
     : name(_name), destination(_destination), personName(_personName), toysLength(_toysLength), toys(_toys)
 {
     id = idClass;
@@ -34,25 +34,36 @@ Gift &Gift::operator=(const Gift &obj)
 istream &operator>>(istream &in, Gift &obj)
 {
 
-    cout << "Introduceti numele cadoului. (alegeti un nume sugestiv si fara spatii)\n";
+    std::cout << "Introduceti numele cadoului. (alegeti un nume sugestiv si fara spatii)\n";
     in.ignore();
     getline(in, obj.name);
-    cout << "Introduceti destinatia cadoului.\n";
+    std::cout << "Introduceti destinatia cadoului.\n";
     getline(in, obj.destination);
-    cout << "Introduceti destinatarului.\n";
+    std::cout << "Introduceti destinatarului.\n";
     getline(in, obj.personName);
-    cout << "Introduceti numarul de jucarii pe care vreti sa il adaugati initial. \n";
+    std::cout << "Introduceti numarul de jucarii pe care vreti sa il adaugati initial. \n";
     in >> obj.toysLength;
     try
     {
-
-        updateToyHelper(in, obj);
+        updateToyHelper(in, obj, false);
     }
-    catch (exception x)
+    catch (ToyTypeExceptions ex)
     {
-        cout << "sebi";
-        cout << x.what();
+        std::cout << ex.what();
     }
+    catch (ToyNotFound ex)
+    {
+        std::cout << ex.what();
+    }
+    catch (exception ex)
+    {
+        std::cout << ex.what();
+    }
+    catch (...)
+    {
+        std::cout << "A aparut o eroare in functia updateToyHolper";
+    }
+
     return in;
 }
 ostream &operator<<(ostream &out, Gift &obj)
@@ -64,13 +75,25 @@ ostream &operator<<(ostream &out, Gift &obj)
     for (int i = 0; i < obj.toys.size(); i++)
     {
         if (dynamic_cast<ClassicToy *>(obj.toys[i].get()))
-            cout << *dynamic_cast<ClassicToy *>(obj.toys[i].get());
-        else if (dynamic_cast<ElectronicToy *>(obj.toys[i].get()))
-            cout << *dynamic_cast<ElectronicToy *>(obj.toys[i].get());
-        else if (dynamic_cast<EducativeToy *>(obj.toys[i].get()))
-            cout << *dynamic_cast<EducativeToy *>(obj.toys[i].get());
+        {
+            out << "ClassicToy" << endl;
+            out << *dynamic_cast<ClassicToy *>(obj.toys[i].get());
+        }
         else if (dynamic_cast<ModernToy *>(obj.toys[i].get()))
-            cout << *dynamic_cast<ModernToy *>(obj.toys[i].get());
+        {
+            out << "ModernToy" << endl;
+            out << *dynamic_cast<ModernToy *>(obj.toys[i].get());
+        }
+        else if (dynamic_cast<ElectronicToy *>(obj.toys[i].get()))
+        {
+            out << "ElectronicToy" << endl;
+            out << *dynamic_cast<ElectronicToy *>(obj.toys[i].get());
+        }
+        else if (dynamic_cast<EducativeToy *>(obj.toys[i].get()))
+        {
+            out << "EducativeToy" << endl;
+            out << *dynamic_cast<EducativeToy *>(obj.toys[i].get());
+        }
     }
 
     out << endl;
@@ -94,7 +117,11 @@ bool operator==(const Gift &lhs, const Gift &rhs)
 
     return res;
 }
-int Gift::getToysLength() const
+const int Gift::getCurrentId()
+{
+    return idClass;
+}
+const int Gift::getToysLength() const
 {
     return toysLength;
 }
@@ -102,19 +129,19 @@ void Gift::setToysLength(int _toysLength)
 {
     toysLength = _toysLength;
 }
-vector<shared_ptr<BToyClass>> Gift::getToys()
+std::vector<shared_ptr<BToyClass>> Gift::getToys()
 {
     return toys;
 }
-const string Gift::getName() const
+const std::string Gift::getName() const
 {
     return name;
 }
-const string Gift::getDestination() const
+const std::string Gift::getDestination() const
 {
     return destination;
 }
-const string Gift::getPersonName() const
+const std::string Gift::getPersonName() const
 {
     return personName;
 };
@@ -122,19 +149,19 @@ const int Gift::getId() const
 {
     return id;
 };
-void Gift::setName(const string _name)
+void Gift::setName(const std::string _name)
 {
     name = _name;
 };
-void Gift::setDestination(const string _destination)
+void Gift::setDestination(const std::string _destination)
 {
     destination = _destination;
 };
-void Gift::setPersonName(const string _personName)
+void Gift::setPersonName(const std::string _personName)
 {
     personName = _personName;
 };
-void Gift::setToys(const vector<shared_ptr<BToyClass>> _toys, const int _toysLength)
+void Gift::setToys(const std::vector<shared_ptr<BToyClass>> _toys, const int _toysLength)
 {
     toys.clear();
     toys = _toys;
@@ -144,15 +171,15 @@ void Gift::updateGift()
     int j;
     do
     {
-        cout << "Ce parametru doriti sa modificati?\n1.Nume cadou\n2.Destinatie cadou\n3.Destinatar cadou\n4.Adaugare jucarie noua\n5.Modificare jucarie existent\n6.Stergere jucarie existenta\n0.Exit\n";
-        cin >> j;
+        std::cout << "Ce parametru doriti sa modificati?\n1.Nume cadou\n2.Destinatie cadou\n3.Destinatar cadou\n4.Adaugare jucarie noua\n5.Modificare jucarie existent\n6.Stergere jucarie existenta\n0.Exit\n";
+        std::cin >> j;
 
         switch (j)
         {
         case 1:
         {
-            cout << "Introduceti noul nume.\n";
-            cin.ignore();
+            std::cout << "Introduceti noul nume.\n";
+            std::cin.ignore();
             getline(cin, name);
             break;
         }
@@ -160,8 +187,8 @@ void Gift::updateGift()
         case 2:
         {
 
-            cout << "Introduceti noua destinatie.\n";
-            cin.ignore();
+            std::cout << "Introduceti noua destinatie.\n";
+            std::cin.ignore();
             getline(cin, destination);
 
             break;
@@ -169,8 +196,8 @@ void Gift::updateGift()
         case 3:
         {
 
-            cout << "Introduceti noul destinatar.\n";
-            cin.ignore();
+            std::cout << "Introduceti noul destinatar.\n";
+            std::cin.ignore();
             getline(cin, personName);
 
             break;
@@ -178,30 +205,30 @@ void Gift::updateGift()
         case 4:
         {
             toysLength++;
-            updateToyHelper(cin, *this);
+            updateToyHelper(cin, *this, true);
             break;
         }
 
         case 5:
         {
             int j;
-            cout << "Ce jucarie vreti sa modificati?\n";
-            cin >> j;
+            std::cout << "Ce jucarie vreti sa modificati?\n";
+            std::cin >> j;
             toys[j - 1]->updateToy();
             break;
         }
         case 6:
         {
             int j;
-            cout << "Ce jucarie vreti sa stergeti?\n";
-            cin >> j;
+            std::cout << "Ce jucarie vreti sa stergeti?\n";
+            std::cin >> j;
             if (j > toysLength)
-                cout << "Aceasta jucarie nu exista\n";
+                std::cout << "Aceasta jucarie nu exista\n";
             else
             {
                 toys.erase(toys.begin() + j);
                 toysLength--;
-                cout << "Stergere reusita\n";
+                std::cout << "Stergere reusita\n";
             }
 
             break;
@@ -214,24 +241,40 @@ void Gift::updateGift()
 }
 void Gift::summariseGift()
 {
-    int sumPrice = 0, sumWeight = 0;
-    for (int i = 0; i < toysLength; i++)
+    float sumPrice = 0, sumWeight = 0, classicToyCount = 0, electronicToyCount = 0, educativeToyCount = 0, modernToyCount = 0;
+    for (int i = 0; i < toys.size(); i++)
     {
+
+        if (dynamic_cast<ClassicToy *>(toys[i].get()))
+            classicToyCount++;
+        else if (dynamic_cast<ModernToy *>(toys[i].get()))
+            modernToyCount++;
+        else if (dynamic_cast<ElectronicToy *>(toys[i].get()))
+            electronicToyCount++;
+        else if (dynamic_cast<EducativeToy *>(toys[i].get()))
+            educativeToyCount++;
         sumPrice += toys[i]->getPrice();
         sumWeight += toys[i]->getWeight();
     }
-    cout << "Pentru cadoul " << name << " pretul total este de " << sumPrice << " cu greutatea de " << sumWeight << endl;
+    std::cout << "Pentru cadoul " << name << " pretul total este de " << sumPrice << " cu greutatea de " << sumWeight
+              << endl
+              << "Numar jucarii clasice: " << classicToyCount << endl
+              << "Numar jucarii electronice: " << electronicToyCount << endl
+              << "Numar jucarii educative: " << educativeToyCount << endl
+              << "Numar jucarii moderne: " << modernToyCount << endl;
 }
-void updateToyHelper(istream &in, Gift &obj)
-
+void updateToyHelper(istream &in, Gift &obj, bool update)
 {
-    for (int j = 0; j < obj.toysLength; j++)
+    cout << "sebi update";
+    update ? obj.toysLength++ : obj.toysLength;
+    for (int j = update ? obj.toysLength - 2 : 0; j < (update ? obj.toysLength - 1 : obj.toysLength); j++)
     {
+        cout << j << " " << obj.toysLength;
         int type;
-        cout << "**************Jucaria numarul: "
-             << "**************\n**********************" << j + 1 << "**********************\nIntroduceti numele jucariei\n";
-        cout << endl
-             << "Ce tip de jucarie vreti sa introduceti?\n1.ClassicToy\n2.ElectronicToy\n3.EducativeToy\n4.ModernToy\n";
+        std::cout << "**************Jucaria numarul: "
+                  << "**************\n**********************" << j + 1 << "**********************\nIntroduceti numele jucariei\n";
+        std::cout << endl
+                  << "Ce tip de jucarie vreti sa introduceti?\n1.ClassicToy\n2.ElectronicToy\n3.EducativeToy\n4.ModernToy\n";
         in >> type;
         switch (type)
         {
