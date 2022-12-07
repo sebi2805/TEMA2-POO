@@ -2,6 +2,7 @@
 #include <string.h>
 #include "InterfaceClass.h"
 #include "ClassicToy.h"
+#include "MyExceptions.h"
 void InterfaceMenu::printMessage()
 {
     std::cout << "Tema numarul 2 \n Virtopeanu Sebastian-Filip\n CTI, GRUPA 264\n";
@@ -56,10 +57,9 @@ void InterfaceMenu::start()
                 std::cout << "Ce cadou vrei sa afisezi?\n";
                 std::cin >> j;
 
-                if (j <= allGifts.size())
-                    std::cout << *allGifts[j - 1];
-                else
-                    std::cout << "Ne pare rau acest cadou nu exista.\n";
+                if (j > allGifts.size())
+                    throw GiftNotFound();
+                std::cout << *allGifts[j - 1];
             }
 
             break;
@@ -76,13 +76,11 @@ void InterfaceMenu::start()
             int j;
             std::cout << "Ce cadou doriti sa stergeti?\n";
             std::cin >> j;
-            if (j <= allGifts.size())
-            {
-                allGifts.erase(allGifts.begin() + j - 1);
-            }
+            if (j > allGifts.size())
+                throw GiftNotFound();
 
-            else
-                std::cout << "Ne pare rau acest cadou nu exista.\n";
+            allGifts.erase(allGifts.begin() + j - 1);
+
             break;
         }
         case 5:
@@ -90,6 +88,8 @@ void InterfaceMenu::start()
             int giftNumber;
             std::cout << "Ce cadou vreti sa modificati?\n";
             std::cin >> giftNumber;
+            if (giftNumber > allGifts.size())
+                throw GiftNotFound();
             allGifts[giftNumber - 1]->updateGift();
             break;
         }
@@ -98,6 +98,8 @@ void InterfaceMenu::start()
             int j;
             std::cout << "Pentru ce cadou vreti afisate informatiile generalizat?\n";
             std::cin >> j;
+            if (j > allGifts.size())
+                throw GiftNotFound();
             allGifts[j - 1]->summariseGift();
             break;
         }

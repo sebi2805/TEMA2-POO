@@ -5,9 +5,9 @@ const char *ToyTypeExceptions::what() const noexcept
 }
 const char *GiftNotFound::what() const noexcept
 {
-    return "This type of toy doesn't exist";
+    return "This gift number doesn't exist";
 }
 const char *ToyNotFound::what() const noexcept
 {
-    return "This type of toy doesn't exist";
+    return "This toy number doesn't exist";
 }

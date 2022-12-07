@@ -49,15 +49,15 @@ istream &operator>>(istream &in, Gift &obj)
     }
     catch (ToyTypeExceptions ex)
     {
-        std::cout << ex.what();
+        std::cout << ex.what() << endl;
     }
     catch (ToyNotFound ex)
     {
-        std::cout << ex.what();
+        std::cout << ex.what() << endl;
     }
     catch (exception ex)
     {
-        std::cout << ex.what();
+        std::cout << ex.what() << endl;
     }
     catch (...)
     {
