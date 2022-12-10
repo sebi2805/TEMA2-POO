@@ -42,10 +42,14 @@ void ElectronicToy::playSound()
 {
     std::cout << "Hi! I'm " << getName() << " and I'm a electronic toy." << endl;
 };
+void ElectronicToy::print(ostream &out)
+{
+    out << "        Numarul de baterii este: " << numberBaterries << endl;
+};
 ostream &operator<<(ostream &out, ElectronicToy &obj)
 {
-    out << *dynamic_cast<BToyClass *>(&obj)
-        << "        Numarul de baterii este: " << obj.numberBaterries << endl;
+    out << *dynamic_cast<BToyClass *>(&obj);
+    obj.print(out);
     return out;
 };
 

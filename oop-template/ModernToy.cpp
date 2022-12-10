@@ -46,8 +46,10 @@ void ModernToy::playSound()
 ostream &operator<<(ostream &out, ModernToy &obj)
 {
 
-    out << *dynamic_cast<ElectronicToy *>(&obj) << *dynamic_cast<EducativeToy *>(&obj)
-        << "        Brandul este: " << obj.brand << endl;
+    out << *dynamic_cast<BToyClass *>(&obj);
+    dynamic_cast<EducativeToy *>(&obj)->print(out);
+    dynamic_cast<ElectronicToy *>(&obj)->print(out);
+    out << "        Brandul este: " << obj.brand << endl;
     return out;
 };
 istream &operator>>(istream &in, ModernToy &obj)
