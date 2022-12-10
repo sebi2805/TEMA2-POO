@@ -15,6 +15,7 @@ public:
     void setAbilityLearned(const string _abilityLearned);
     bool operator==(const EducativeToy &obj);
     bool operator!=(const EducativeToy &obj);
+    void print(ostream &out);
     void playSound() override;
     friend ostream &operator<<(ostream &out, EducativeToy &obj);
     friend istream &operator>>(istream &in, EducativeToy &obj);

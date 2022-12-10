@@ -40,11 +40,15 @@ EducativeToy &EducativeToy::operator=(const EducativeToy &obj)
     abilityLearned = obj.abilityLearned;
     return *this;
 };
+
+void EducativeToy::print(ostream &out)
+{
+    out << "        Abilitatea dezvoltata este: " << abilityLearned << endl;
+}
 ostream &operator<<(ostream &out, EducativeToy &obj)
 {
-
-    out << *dynamic_cast<BToyClass *>(&obj)
-        << "        Abilitatea dezvoltata este: " << obj.abilityLearned << endl;
+    out << *dynamic_cast<BToyClass *>(&obj);
+    obj.print(out);
     return out;
 };
 istream &operator>>(istream &in, EducativeToy &obj)

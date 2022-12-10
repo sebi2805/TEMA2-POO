@@ -16,6 +16,7 @@ public:
     bool operator==(const ElectronicToy &obj);
     bool operator!=(const ElectronicToy &obj);
     void playSound() override;
+    void print(ostream &out);
     ElectronicToy &operator=(const ElectronicToy &obj);
     friend ostream &operator<<(ostream &out, ElectronicToy &obj);
     friend istream &operator>>(istream &in, ElectronicToy &obj);

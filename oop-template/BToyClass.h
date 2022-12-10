@@ -12,7 +12,6 @@ private:
     float price, weight;
     int age;
     int id;
-    bool isRead = false, isPrinted = false;
 
 public:
     explicit BToyClass(const string _name = "undefined", float _price = 0,
@@ -33,7 +32,7 @@ public:
     void setPrice(float _price);
     void setWeight(float _weight);
     void setAge(float _age);
-    void setIsPrinted(bool isPrinted);
+
     void updateToy();
     void setId(int id);
     virtual ~BToyClass()
