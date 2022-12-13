@@ -14,12 +14,12 @@ ModernToy::ModernToy(const ModernToy &obj) : ElectronicToy(obj), EducativeToy(ob
 {
     brand = obj.brand;
 }
-const std::string ModernToy::getAbilityLearned() const
+const std::string ModernToy::getBrand() const
 {
     return brand;
 };
 
-void ModernToy::setAbilityLearned(const std::string _brand)
+void ModernToy::setBrand(const std::string _brand)
 {
     brand = _brand;
 };

@@ -32,7 +32,6 @@ public:
     void setPrice(float _price);
     void setWeight(float _weight);
     void setAge(float _age);
-
     void updateToy();
     void setId(int id);
     virtual ~BToyClass()
