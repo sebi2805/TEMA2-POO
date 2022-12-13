@@ -12,8 +12,8 @@ public:
               const std::string _category = "none", int _age = 3, int _id = 1,
               std::string brand = "general", int numberBatteries = 1, std::string abilityLearned = "general");
     ModernToy(const ModernToy &obj);
-    const std::string getAbilityLearned() const;
-    void setAbilityLearned(const std::string _abilityLearned);
+    const std::string getBrand() const;
+    void setBrand(const std::string _abilityLearned);
     bool operator==(const ModernToy &obj);
     bool operator!=(const ModernToy &obj);
     void playSound() override;
