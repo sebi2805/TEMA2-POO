@@ -94,9 +94,9 @@ void BToyClass::setWeight(float _weight)
 {
     weight = _weight;
 };
-void BToyClass::print()
+void BToyClass::print(ostream &out)
 {
-    cout << *this;
+    out << *this;
 };
 void BToyClass::setAge(float _age) { age = _age; };
 
