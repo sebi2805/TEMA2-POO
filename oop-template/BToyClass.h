@@ -18,6 +18,7 @@ public:
                        float _weight = 0, const string _category = "none", int _age = 3, int _id = 1);
     BToyClass(const BToyClass &obj);
     BToyClass &operator=(const BToyClass &obj);
+    virtual void print();
     friend ostream &operator<<(ostream &out, BToyClass &obj);
     friend istream &operator>>(istream &in, BToyClass &obj);
     bool operator==(const BToyClass &obj);
